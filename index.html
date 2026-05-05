@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank ABC - Simulasi Edukasi Deepfake</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- ===== WARNING BANNER ===== -->
+  <!-- <div id="warningBanner">
+    <div class="warning-inner">
+      <i class="fas fa-shield-exclamation"></i>
+      <span>⚠️ INI ADALAH SIMULASI EDUKASI — Menampilkan bagaimana deepfake digunakan untuk penipuan perbankan</span>
+      <button onclick="document.getElementById('warningBanner').style.display='none'">✕</button>
+    </div>
+  </div> -->
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div id="screen-splash" class="screen active">
+    <div class="splash-bg"></div>
+    <div class="splash-content">
+      <div class="bank-logo-wrap">
+        <div class="bank-logo">
+          <span class="logo-icon"><i class="fas fa-landmark"></i></span>
+          <span class="logo-text">ABC</span>
+        </div>
+        <p class="bank-tagline">Bank ABC</p>
+        <p class="bank-sub">Terpercaya & Terdepan</p>
+      </div>
+      <div class="splash-loader">
+        <div class="loader-bar"><div class="loader-fill" id="splashLoader"></div></div>
+        <p class="loader-text">Memuat aplikasi...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HOME SCREEN ===== -->
+  <div id="screen-home" class="screen">
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="header-logo">
+          <i class="fas fa-landmark"></i> Bank ABC
+        </div>
+        <div class="header-icons">
+          <i class="fas fa-bell"></i>
+          <i class="fas fa-headset"></i>
+        </div>
+      </header>
+      <div class="home-hero">
+        <div class="hero-text">
+          <p class="hero-greeting">Selamat Datang 👋</p>
+          <h2>Buka Rekening<br/>Mudah & Cepat</h2>
+          <p class="hero-desc">Proses 100% digital, tanpa perlu ke kantor cabang</p>
+        </div>
+        <div class="hero-img"><i class="fas fa-mobile-screen-button"></i></div>
+      </div>
+      <div class="home-cards">
+        <div class="feature-card primary" onclick="goTo('screen-register')">
+          <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
+          <div class="card-text">
+            <h3>Buka Rekening Baru</h3>
+            <p>Proses cepat 5 menit</p>
+          </div>
+          <i class="fas fa-chevron-right card-arrow"></i>
+        </div>
+        <div class="feature-card">
+          <div class="card-icon secondary"><i class="fas fa-right-to-bracket"></i></div>
+          <div class="card-text">
+            <h3>Masuk ke Akun</h3>
+            <p>Sudah punya rekening?</p>
+          </div>
+          <i class="fas fa-chevron-right card-arrow"></i>
+        </div>
+      </div>
+      <div class="home-info">
+        <div class="info-item"><i class="fas fa-shield-halved"></i><span>Dijamin OJK & LPS</span></div>
+        <div class="info-item"><i class="fas fa-lock"></i><span>Enkripsi 256-bit</span></div>
+        <div class="info-item"><i class="fas fa-clock"></i><span>Layanan 24/7</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REGISTER SCREEN ===== -->
+  <div id="screen-register" class="screen">
+    <div class="app-shell">
+      <header class="app-header">
+        <button class="btn-back" onclick="goTo('screen-home')"><i class="fas fa-arrow-left"></i></button>
+        <span class="header-title">Buka Rekening Baru</span>
+        <span></span>
+      </header>
+      <div class="progress-wrap">
+        <div class="progress-steps">
+          <div class="step active" id="step1"><span>1</span><p>KTP</p></div>
+          <div class="step-line"></div>
+          <div class="step" id="step2"><span>2</span><p>Biodata</p></div>
+          <div class="step-line"></div>
+          <div class="step" id="step3"><span>3</span><p>Info Rekening</p></div>
+          <div class="step-line"></div>
+          <div class="step" id="step4"><span>4</span><p>Verifikasi</p></div>
+        </div>
+      </div>
+      <div class="screen-body">
+
+        <!-- STEP 1: Upload KTP -->
+        <div id="panel-step1" class="step-panel active">
+          <div class="panel-header">
+            <h2>Upload Foto KTP</h2>
+            <p>Pastikan foto KTP jelas dan tidak buram</p>
+          </div>
+
+          <!-- DEEPFAKE CALLOUT -->
+          <!-- <div class="deepfake-callout">
+            <div class="callout-header">
+              <i class="fas fa-triangle-exclamation"></i>
+              <strong>MODUS DEEPFAKE — Tahap 1</strong>
+            </div>
+            <p>Pelaku menggunakan foto wajah sintetis dari <strong>thispersondoesnotexist.com</strong> yang ditempel ke KTP palsu. Wajah ini tidak nyata — dibuat oleh AI.</p>
+            <div class="fake-flow">
+              <div class="fake-step">
+                <img src="image.jpg" alt="Wajah AI" class="fake-face"/>
+                <span>Wajah AI Generated</span>
+              </div>
+              <i class="fas fa-arrow-right"></i>
+              <div class="fake-step">
+                <div class="fake-ktp-mini">
+                  <div class="ktp-mini-header">KTP PALSU</div>
+                  <img src="image.jpg" alt="KTP Palsu" class="fake-face"/>
+                  <div class="ktp-mini-info">
+                    <small>BUDI SANTOSO</small>
+                    <small>3271xxxxxxxxxxxx</small>
+                  </div>
+                </div>
+                <span>KTP Diedit</span>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="upload-area" id="uploadArea" onclick="simulateUpload()">
+            <div class="upload-icon"><i class="fas fa-camera"></i></div>
+            <h3>Foto KTP Anda</h3>
+            <p>Ketuk untuk mengambil foto atau unggah dari galeri</p>
+            <button class="btn-upload">Pilih Foto KTP</button>
+          </div>
+
+          <div class="ktp-preview" id="ktpPreview" style="display:none">
+            <div class="ktp-card">
+              <div class="ktp-header-bar">
+                <span>REPUBLIK INDONESIA</span>
+                <span>KARTU TANDA PENDUDUK</span>
+              </div>
+              <div class="ktp-body">
+                <div class="ktp-photo-wrap">
+                  <img src="image.jpg" alt="Foto KTP" id="ktpPhoto"/>
+                  <div class="deepfake-badge"><i class="fas fa-robot"></i> AI FACE</div>
+                </div>
+                <div class="ktp-details">
+                  <div class="ktp-row"><span>NIK</span><span>531245678901234</span></div>
+                  <div class="ktp-row"><span>Nama</span><span>BUDI SANTOSO</span></div>
+                  <div class="ktp-row"><span>TTL</span><span>Jakarta, 25-09-1999</span></div>
+                  <div class="ktp-row"><span>Jenis Kelamin</span><span>Laki-laki</span></div>
+                  <div class="ktp-row"><span>Alamat</span><span>Jl. Taman Teman</span></div>
+                  <div class="ktp-row"><span>Kel/Desa</span><span>Pegadungan</span></div>
+                  <div class="ktp-row"><span>Kecamatan</span><span>Kalideres</span></div>
+                  <div class="ktp-row"><span>Kota</span><span>Jakarta Barat</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="upload-success">
+              <i class="fas fa-circle-check"></i>
+              <span>KTP berhasil diverifikasi sistem</span>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="btnStep1" onclick="nextStep(2)" style="display:none">
+            Lanjutkan <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- STEP 2: Biodata (OCR) -->
+        <div id="panel-step2" class="step-panel">
+          <div class="panel-header">
+            <h2>Data Diri</h2>
+            <p>Data diisi otomatis dari KTP Anda</p>
+          </div>
+          <div class="ocr-badge">
+            <i class="fas fa-wand-magic-sparkles"></i> Data terisi otomatis via OCR
+          </div>
+          <div class="form-group">
+            <label>Nomor Induk Kependudukan (NIK)</label>
+            <input type="text" id="f-nik" value="3271082509870003" readonly class="input-readonly"/>
+          </div>
+          <div class="form-group">
+            <label>Nama Lengkap (sesuai KTP)</label>
+            <input type="text" id="f-nama" value="BUDI SANTOSO" readonly class="input-readonly"/>
+          </div>
+          <div class="form-group">
+            <label>Tempat Lahir</label>
+            <input type="text" id="f-ttl-kota" value="Jakarta" readonly class="input-readonly"/>
+          </div>
+          <div class="form-group">
+            <label>Tanggal Lahir</label>
+            <input type="date" id="f-ttl" value="1987-09-25" readonly class="input-readonly"/>
+          </div>
+          <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <select id="f-jk" disabled>
+              <option value="L" selected>Laki-laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Alamat KTP</label>
+            <textarea id="f-alamat" readonly class="input-readonly">Jl. Mawar No. 12, Kebon Jeruk, Kebon Jeruk, Jakarta Barat</textarea>
+          </div>
+          <div class="form-group">
+            <label>Nomor Telepon Aktif *</label>
+            <input type="tel" id="f-hp" placeholder="08xxxxxxxxxx" />
+          </div>
+          <div class="form-group">
+            <label>Email Aktif *</label>
+            <input type="email" id="f-email" placeholder="email@contoh.com" />
+          </div>
+          <button class="btn-primary" onclick="nextStep(3)">
+            Lanjutkan <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- STEP 3: Info Rekening -->
+        <div id="panel-step3" class="step-panel">
+          <div class="panel-header">
+            <h2>Informasi Rekening</h2>
+            <p>Lengkapi informasi untuk pembukaan rekening</p>
+          </div>
+          <div class="form-group">
+            <label>Jenis Rekening</label>
+            <select id="f-jenis">
+              <option value="">-- Pilih Jenis Rekening --</option>
+              <option value="tabungan">Tabungan ABC Reguler</option>
+              <option value="giro">Giro ABC Bisnis</option>
+              <option value="deposito">Deposito ABC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tujuan Pembukaan Rekening</label>
+            <select id="f-tujuan">
+              <option value="">-- Pilih Tujuan --</option>
+              <option>Tabungan Pribadi</option>
+              <option>Keperluan Bisnis</option>
+              <option>Investasi</option>
+              <option>Gaji / Payroll</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sumber Dana</label>
+            <select id="f-sumber">
+              <option value="">-- Pilih Sumber Dana --</option>
+              <option>Gaji / Upah</option>
+              <option>Usaha Sendiri</option>
+              <option>Warisan</option>
+              <option>Investasi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Perkiraan Penghasilan per Bulan</label>
+            <select id="f-income">
+              <option value="">-- Pilih Range --</option>
+              <option>Di bawah Rp 3.000.000</option>
+              <option>Rp 3.000.000 – Rp 5.000.000</option>
+              <option>Rp 5.000.000 – Rp 10.000.000</option>
+              <option>Di atas Rp 10.000.000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Pekerjaan</label>
+            <input type="text" id="f-kerja" placeholder="Contoh: Karyawan Swasta"/>
+          </div>
+          <div class="form-group">
+            <label>Nama Perusahaan / Instansi</label>
+            <input type="text" id="f-perusahaan" placeholder="Nama perusahaan tempat bekerja"/>
+          </div>
+          <div class="form-group">
+            <label>NPWP (opsional)</label>
+            <input type="text" id="f-npwp" placeholder="xx.xxx.xxx.x-xxx.xxx"/>
+          </div>
+          <div class="form-group">
+            <label>Setoran Awal</label>
+            <div class="input-prefix">
+              <span>Rp</span>
+              <input type="number" id="f-setoran" placeholder="500000" min="100000"/>
+            </div>
+            <small>Minimal setoran awal Rp 100.000</small>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="chk-syarat"/>
+            <label for="chk-syarat">Saya menyetujui <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> Bank ABC</label>
+          </div>
+          <button class="btn-primary" onclick="nextStep(4)">
+            Lanjutkan ke Verifikasi <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- STEP 4: Video Call -->
+        <div id="panel-step4" class="step-panel">
+          <div class="panel-header">
+            <h2>Verifikasi Video Call</h2>
+            <p>Lakukan video call dengan Customer Service kami</p>
+          </div>
+
+          <!-- <div class="deepfake-callout red">
+            <div class="callout-header">
+              <i class="fas fa-video"></i>
+              <strong>MODUS DEEPFAKE — Tahap 2 (Paling Berbahaya)</strong>
+            </div>
+            <p>Pelaku menggunakan <strong>DeepLiveCam / DeepFaceLive</strong> untuk mengganti wajah real-time saat video call. Wajah yang tampil = wajah AI di KTP palsu. CS tidak bisa membedakan!</p>
+          </div> -->
+
+          <div class="vc-info-card">
+            <div class="vc-info-row">
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Estimasi Waktu</strong>
+                <p>3-5 menit</p>
+              </div>
+            </div>
+            <div class="vc-info-row">
+              <i class="fas fa-list-check"></i>
+              <div>
+                <strong>Yang Perlu Disiapkan</strong>
+                <p>KTP asli (palsu), pencahayaan cukup</p>
+              </div>
+            </div>
+            <div class="vc-info-row">
+              <i class="fas fa-wifi"></i>
+              <div>
+                <strong>Koneksi Internet</strong>
+                <p>Minimal 4G / WiFi stabil</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary btn-videocall" onclick="goTo('screen-videocall')">
+            <i class="fas fa-video"></i> Mulai Video Call
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VIDEO CALL SCREEN ===== -->
+  <div id="screen-videocall" class="screen">
+    <div class="vc-shell">
+
+      <!-- Status Bar -->
+      <div class="vc-statusbar">
+        <span id="vc-timer">00:00</span>
+        <span class="vc-secure"><i class="fas fa-lock"></i> Terenkripsi</span>
+        <span class="vc-quality"><i class="fas fa-signal"></i> HD</span>
+      </div>
+
+      <!-- Remote Video (CS) -->
+      <div class="vc-remote">
+        <video id="remoteVideo" autoplay muted loop playsinline>
+          <source src="cs_video.mp4" type="video/mp4"/>
+        </video>
+        <div class="vc-remote-overlay">
+          <div class="vc-name-tag">
+            <i class="fas fa-headset"></i> Sarah — Customer Service Bank ABC
+          </div>
+        </div>
+        <!-- Placeholder jika video tidak ada -->
+        <div class="vc-placeholder" id="vcPlaceholder">
+          <div class="vc-avatar">
+            <i class="fas fa-user-headset"></i>
+          </div>
+          <p>Sarah</p>
+          <small>Customer Service</small>
+        </div>
+      </div>
+
+      <!-- Local Video (Pelaku + Deepfake) -->
+      <div class="vc-local" id="vcLocal">
+        <video id="localVideo" autoplay muted playsinline>
+          <source src="deepfake_video.mp4" type="video/mp4"/>
+        </video>
+        <div class="vc-local-placeholder" id="vcLocalPlaceholder">
+          <img src="image.jpg" alt="Deepfake Face" id="deepfakePreview"/>
+          <div class="deepfake-overlay-badge">
+            <!-- <i class="fas fa-robot"></i> DEEPFAKE ACTIVE -->
+          </div>
+        </div>
+        <div class="vc-local-label">Anda</div>
+      </div>
+
+      Chat / Transcript
+      <div class="vc-transcript" id="vcTranscript">
+        <div class="transcript-header">
+          <i class="fas fa-comments"></i> Percakapan
+        </div>
+        <div class="transcript-body" id="transcriptBody">
+          <!-- Messages will be injected by JS -->
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="vc-controls">
+        <button class="vc-btn" id="btnMic" onclick="toggleMic()">
+          <i class="fas fa-microphone"></i>
+          <span>Mikrofon</span>
+        </button>
+        <button class="vc-btn end" onclick="endCall()">
+          <i class="fas fa-phone-slash"></i>
+          <span>Akhiri</span>
+        </button>
+        <button class="vc-btn" onclick="toggleChat()">
+          <i class="fas fa-comment"></i>
+          <span>Chat</span>
+        </button>
+        <!-- <button class="vc-btn deepfake-btn" title="DeepLiveCam Active"> -->
+          <i class="fas fa-robot"></i>
+          <span>AI Face</span>
+        </button>
+      </div>
+
+      <!-- Deepfake Indicator -->
+      <!-- <div class="deepfake-indicator">
+        <div class="indicator-dot"></div>
+        <span>DeepLiveCam — Aktif</span>
+      </div> -->
+
+    </div>
+  </div>
+
+  <!-- ===== SUCCESS SCREEN ===== -->
+  <div id="screen-success" class="screen">
+    <div class="app-shell">
+      <div class="success-content">
+        <div class="success-animation">
+          <div class="success-circle">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="success-rings">
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="ring ring3"></div>
+          </div>
+        </div>
+        <h2>Rekening Berhasil Dibuka!</h2>
+        <p class="success-sub">Selamat, rekening Bank ABC Anda telah aktif</p>
+
+        <div class="account-card">
+          <div class="account-card-header">
+            <i class="fas fa-landmark"></i> Bank ABC
+          </div>
+          <div class="account-card-body">
+            <p class="account-name">BUDI SANTOSO</p>
+            <p class="account-number">1234 5678 9012</p>
+            <p class="account-type">Tabungan ABC Reguler</p>
+          </div>
+          <div class="account-card-footer">
+            <span>Saldo Awal</span>
+            <span class="account-balance">Rp 500.000</span>
+          </div>
+        </div>
+
+        <!-- EDUKASI PANEL -->
+        <!-- <div class="edu-panel">
+          <div class="edu-header">
+            <i class="fas fa-graduation-cap"></i>
+            <strong>PELAJARAN DARI SIMULASI INI</strong>
+          </div>
+          <div class="edu-timeline">
+            <div class="edu-item danger">
+              <div class="edu-icon"><i class="fas fa-id-card"></i></div>
+              <div class="edu-text">
+                <strong>KTP Palsu + Wajah AI</strong>
+                <p>Pelaku membuat KTP palsu dengan foto dari AI generator (thispersondoesnotexist.com). Wajah ini tidak ada di dunia nyata.</p>
+              </div>
+            </div>
+            <div class="edu-item danger">
+              <div class="edu-icon"><i class="fas fa-video"></i></div>
+              <div class="edu-text">
+                <strong>Deepfake Real-time saat Video Call</strong>
+                <p>Menggunakan DeepLiveCam, pelaku menampilkan wajah AI yang sama dengan KTP palsu secara real-time. CS tidak bisa membedakan.</p>
+              </div>
+            </div>
+            <div class="edu-item warning">
+              <div class="edu-icon"><i class="fas fa-triangle-exclamation"></i></div>
+              <div class="edu-text">
+                <strong>Rekening Digunakan untuk Kejahatan</strong>
+                <p>Rekening ini bisa digunakan untuk pencucian uang, penipuan, atau aktivitas ilegal lainnya atas nama identitas palsu.</p>
+              </div>
+            </div>
+            <div class="edu-item success">
+              <div class="edu-icon"><i class="fas fa-shield-halved"></i></div>
+              <div class="edu-text">
+                <strong>Cara Pencegahan</strong>
+                <p>Bank perlu: deteksi liveness (blink, gerak kepala), verifikasi biometrik multi-layer, AI anti-spoofing, dan pelatihan CS mengenali deepfake.</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <button class="btn-primary" onclick="resetApp()">
+          <i class="fas fa-rotate-left"></i> Ulangi Simulasi
+        </button> -->
+        <button class="btn-secondary" onclick="goTo('screen-home')">
+          <i class="fas fa-house"></i> Kembali ke Beranda
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
